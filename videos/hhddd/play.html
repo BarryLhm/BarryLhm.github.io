@@ -1,0 +1,27 @@
+<html><head><title>皇后大道东</title></head><meta charset="utf-8"><body><script src="../dist/hls.js"></script><center>
+
+<video height="600" id="video" controls></video>
+
+</center><script>
+
+      var video = document.getElementById('video');
+      if (Hls.isSupported()) {
+        var hls = new Hls({
+          debug: true,
+        });
+        hls.loadSource('play.m3u8');
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+          video.muted = false;
+          video.play();
+        });
+      }
+      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = 'play.m3u8';
+        video.addEventListener('canplay', function () {
+          video.play();
+        });
+      }
+
+</script></body></html>
+    
